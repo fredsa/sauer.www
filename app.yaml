@@ -1,0 +1,53 @@
+application: s~sauer-www
+version: git-md5-hash
+runtime: python27
+api_version: 1
+threadsafe: true
+
+
+builtins:
+- appstats: on
+- remote_api: on
+
+
+inbound_services:
+- mail
+
+
+handlers:
+- url: /(favicon\.ico)
+  static_files: \1
+  upload: favicon\.ico
+
+# Domain verfication: Webmaster Tools, Analytics, etc.
+- url: /(google.*\.html)
+  static_files: \1
+  upload: google.*\.html
+
+# Appstats
+- url: /stats.*
+  script: google.appengine.ext.appstats.ui.app
+  login: admin
+
+# /amazon
+- url: /(amazon/.*\.gif)
+  static_files: \1
+  upload: amazon/.*\.gif
+
+# site CSS images
+- url: /(site/.*\.gif)
+  static_files: \1
+  upload: sites/.*\.gif
+
+# Everything else (MUST APPEAR LAST)
+- url: /.*
+  script: main.application
+  login: optional
+  secure: always
+
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest

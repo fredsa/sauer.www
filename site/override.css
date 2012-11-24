@@ -1,0 +1,16 @@
+<style type="text/css">
+#sidebar a {
+  text-decoration: none;
+}
+
+a:visited {
+    color: #A90707;
+}
+
+li {
+	margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  line-height: 1.4em;
+}
+
+</style>

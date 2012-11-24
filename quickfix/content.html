@@ -1,0 +1,275 @@
+<script>
+function show(elem, id) {
+  alert(document.getElementById(id).innerHTML);
+}
+</script>
+
+<pre style="display: none;" id="foobar">
+The need to print barcodes on document output from Oracle Applications
+is prevalent mostly in the Supply Chain modules. For example printing
+the Item Number on a label, Order number on an acknowledgment, etc.
+But barcodes can be used in numerous places to increase productivity
+and reduce errors!
+
+As experienced Oracle Applications Developers we have been involved in
+many projects where task on implementing barcode print outs was seen
+as a major expenditure of cash and time, and it need not be. The
+following short instructions detail all the setup that is needed to
+print
+
+Assumptions:
+- Foobar was originally written for 3of9 for HP/UX -11, but can be
+  modified (by recompiling) for any operating system
+- You system has a C compiler (UNIX does)
+- You are using PCL compatible printers
+</pre>
+
+<pre style="display: none;" id="postscript">
+While Oracle Reports 2.5 provides the ability to generate bitmap (or
+graphical) reports within Oracle Financials, output on UNIX platforms
+is still limited to Postscript only.  While most all laser printers
+are PCL compatible, a smaller number are also Postscript. So how do
+you print your bitmapped output from Oracle Financials to the
+non-Postscript, PCL only printers?
+
+A solution to this problem could be to purchase postscript cartridges
+for each and every printer to which you wish to print bitmap reports.
+But this is usually an expensive option and likely not in the project
+budget
+
+Another solution involves a little setup, some time with a UNIX savvy
+system administrator, a web browser and an Internet connection in
+order to download the necessary free software.
+
+This document describes how Oracle Financials bitmap reports can be
+printed to PCL only LaserJet (compatible) printers.
+</pre>
+
+<pre style="display: none;" id="email">
+The purpose of this document and the accompanying script
+report2email.sh is to enable you to send Oracle Financials report
+output automatically to the user via email. This can be done
+interactively or through batch submitted programs and requires no
+customizations/changes to the documents you will be emailing. You will
+have the option to send the report as part of the body of the email
+message or as an attachment.
+
+When sending as an attachment you can choose any file type to send as,
+so that the application of your choice will automatically open when
+you double-click on your email attachment. For example, if you choose
+a file type of csv, Excel will open and it will automatically attempt
+to convert the text of the report to columns using the user's most
+recent choices when Data | Text to columns. was last selected in
+Excel. If doc is used Word will automatically open. A special case is
+when rtf is used as the extension. The shell script will recognize
+this extension and add to the character report RTF formatting
+information such as which font to use and whether or not the report
+should be shown portrait or landscape. Finally, for mail clients that
+do not support UUENCODED attachments you have the option of sending
+attached inline (in the body of the email) or as the MIME type
+text/plain.
+
+In general, the concepts are the same as printing to a regular
+printer, but several features are detailed in this document that will
+enable you users to take advantage of advanced feature. Some steps
+detailed here are OPTIONAL. To harness the full-featured functionality
+you must complete all the setup steps. However the shell script will
+still work if you have only performed the REQUIRED steps, provided you
+have meet the 'Optional Assumptions' in each OPTIONAL step.
+</pre>
+
+<pre style="display: none;" id="bitmap">
+Background
+Users of Oracle Financials often have the need to print postscript or
+bitmapped out put directly from
+the application. This is most common when you print external customer
+documents from Oracle
+Financials, such as invoices, checks, sales quotes, shipping notices,
+purchase orders, etc. You want
+these documents to be pretty and present a nice easy to read layout to
+your customers and vendors.
+The problem is that Oracles standard reports (those shipped with the
+applications) do not meet this
+goal. They are often poorly organized and do not contain all the
+information you want your partners to
+view. And there is a misconception that Oracle Financials does not
+have the ability to print anything
+but the monotone, same font, same point size output.
+
+The solution lays in using Reports Developer and a few extra setup
+steps in System Administration. The end result is that you can print
+beautiful  reports with logos, lines, boxes, graphics, charts and
+barcodes directly from Oracle
+Financials.
+
+There is no need to use 3  party software or products. With the power
+of Developer 2000 and the
+flexibility of Oracle Financials it can be achieved with minimal
+effort. If you follow these instructions
+you should be printing postscript output within the day!
+</pre>
+
+<p>Pushing Oracle to do more with your documents? We can help. ASC has a developed a
+&quot;QuickFix&quot; which consists of detailed instructions and scripts to allow you to get the
+most of your Oracle reporting. All you do is download and implement. Most solutions should take just
+a few minutes and you are up and running with features that will blow your end users and clients
+away!</p>
+
+<p>These solutions have been implemented at hundreds of client sites over the last 10 years and are
+frequently referenced within the Oracle communitiy and are tailored for Oracle Applications. If your
+site lacks the technical resources, ASC is also offering on site or remote installation called
+QuickFix Consulting solutions, along with the popular downloads. <br>
+</p>
+
+<ul>
+  <li>FooBar QuickFix: Print 3 of 9 barcodes on any Oracle document. No need to purchase barcode
+  fonts! <a href="javascript:show(this, 'foobar');">learn more...</a><br>
+  
+  <form action="https://checkout.google.com/cws/v2/Merchant/119182417168152/checkoutForm"
+    id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm">
+  <table cellpadding="5" cellspacing="0" width="1%">
+    <tbody>
+      <tr>
+        <td align="right" width="1%"><select name="item_selection_1">
+          <option value="1">$300.00 - QuickFix FooBar</option>
+          <option value="2">$1,000.00 - QuickFix Consutling Foobar</option>
+        </select><input name="item_option_name_1" value="QuickFix FooBar" type="hidden"><input
+          name="item_option_price_1" value="300.0" type="hidden"><input
+          name="item_option_description_1"
+          value="Download QuickFix FooBar now and get working! 
+Includes:
+ detailed documentation and scripts, everything you need to print 3 or 9 Barcodes from Oracle Applications concurrent manager or directly from Oracle Reports 2.5 to 10g. No Support is provided with product."
+          type="hidden"><input name="item_option_quantity_1" value="1" type="hidden"><input
+          name="item_option_currency_1" value="USD" type="hidden"><input name="item_option_name_2"
+          value="QuickFix Consutling Foobar" type="hidden"><input name="item_option_price_2"
+          value="1000.0" type="hidden"><input name="item_option_description_2"
+          value="Includes: 
+* 8 hrs of offsite consulting to implement QuickFix FooBar 3 or 9 Barcode printing. 
+* Detailed instructions on setup 
+* Detailed instructions to add code to Oracle Reports
+* Shell script "
+          type="hidden"><input name="item_option_quantity_2" value="1" type="hidden"><input
+          name="item_option_currency_2" value="USD" type="hidden"></td>
+        <td align="left" width="1%"><input alt=""
+          src="https://checkout.google.com/buttons/buy.gif?merchant_id=119182417168152&amp;w=117&amp;h=48&amp;style=white&amp;variant=text&amp;loc=en_US"
+          type="image"></td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+  </li>
+
+  <li>Creating and installing Bitmapped/Graphic/PostScript reporting. Want a the company logo on
+  your PO? Create a professional looking AR invoice? This QuickFix can save you hundreds of
+  thousands of dollars by avoiding 3rd party software. Say goodbye to Evergreen, Jetforms and Optio!
+  <a href="javascript:show(this, 'bitmap');">learn more...</a><br>
+
+  <form action="https://checkout.google.com/cws/v2/Merchant/119182417168152/checkoutForm"
+    id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm">
+  <table cellpadding="5" cellspacing="0" width="1%">
+    <tbody>
+      <tr>
+        <td align="right" width="1%"><select name="item_selection_1">
+          <option value="1">$300.00 - QuickFix GUI Reporting</option>
+          <option value="2">$1,000.00 - QuickFix Consulting GUI Reporting</option>
+        </select><input name="item_option_name_1" value="QuickFix GUI Reporting" type="hidden"><input
+          name="item_option_price_1" value="300.0" type="hidden"><input
+          name="item_option_description_1"
+          value="Includes: Detailed instructions to setup System Adimstration and Applications Developer to produce the bitmapped/GUI output. Also has instructions for settings Oracle Report and shows an example report. Requires technical skills and changes to the actual reports.
+
+Does not include support. "
+          type="hidden"><input name="item_option_quantity_1" value="1" type="hidden"><input
+          name="item_option_currency_1" value="USD" type="hidden"><input name="item_option_name_2"
+          value="QuickFix Consulting GUI Reporting" type="hidden"><input name="item_option_price_2"
+          value="1000.0" type="hidden"><input name="item_option_description_2"
+          value="Includes:
+* 8 hours of off site consulting to complete installation of QuickFix GUI Reporting. 
+* detailed instructions for you to create and install your own bitmappped/GUI reports.
+
+Consulting time to create your custom/modified bitmpaped/GUI report is billed at $125/hr."
+          type="hidden"><input name="item_option_quantity_2" value="1" type="hidden"><input
+          name="item_option_currency_2" value="USD" type="hidden"></td>
+        <td align="left" width="1%"><input alt=""
+          src="https://checkout.google.com/buttons/buy.gif?merchant_id=119182417168152&amp;w=117&amp;h=48&amp;style=white&amp;variant=text&amp;loc=en_US"
+          type="image"></td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+  </li>
+
+  <li>Printing Postscript documents to non-Postscript or PCL printers, saving thousands of dollars
+  on printer hardware. <a href="javascript:show(this, 'postscript');">learn more...</a><br>
+
+  <form action="https://checkout.google.com/cws/v2/Merchant/119182417168152/checkoutForm"
+    id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm">
+  <table cellpadding="5" cellspacing="0" width="1%">
+    <tbody>
+      <tr>
+        <td align="right" width="1%"><select name="item_selection_1">
+          <option value="1">$300.00 - QuickFix PS to PCL</option>
+          <option value="2">$1,000.00 - QuickFix Consulting PS to PCL</option>
+        </select><input name="item_option_name_1" value="QuickFix PS to PCL" type="hidden"><input
+          name="item_option_price_1" value="300.0" type="hidden"><input
+          name="item_option_description_1"
+          value="Includes:
+* Detailed instructions and scripts to allow you to convert Postscript output to PCL printers
+
+No support is inluced with this QuickFix."
+          type="hidden"><input name="item_option_quantity_1" value="1" type="hidden"><input
+          name="item_option_currency_1" value="USD" type="hidden"><input name="item_option_name_2"
+          value="QuickFix Consulting PS to PCL" type="hidden"><input name="item_option_price_2"
+          value="1000.0" type="hidden"><input name="item_option_description_2"
+          value="Includes: 
+* 8 hrs of offsite consulting to implement QuickFix PS to PCL. 
+* Detailed instructions on setup within the applications
+* Detailed instructions to add code to Oracle Reports
+* Shell script"
+          type="hidden"><input name="item_option_quantity_2" value="1" type="hidden"><input
+          name="item_option_currency_2" value="USD" type="hidden"></td>
+        <td align="left" width="1%"><input alt=""
+          src="https://checkout.google.com/buttons/buy.gif?merchant_id=119182417168152&amp;w=117&amp;h=48&amp;style=white&amp;variant=text&amp;loc=en_US"
+          type="image"></td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+  </li>
+
+  <li>Email any report from Oracle Application to individuals/groups managed through profile options
+  and printer setup. Documents can be sent as MS Word, PDF or notepad attachments. No customization
+  of individual reports required. Imagine extensive savings on printer costs and man hours! <a
+    href="javascript:show(this, 'email');">learn more...</a>
+
+  <form action="https://checkout.google.com/cws/v2/Merchant/119182417168152/checkoutForm"
+    id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm">
+  <table cellpadding="5" cellspacing="0" width="1%">
+    <tbody>
+      <tr>
+        <td align="right" width="1%"><select name="item_selection_1">
+          <option value="1">$300.00 - QuickFix Email</option>
+          <option value="2">$1,000.00 - QuickFix Consulting Email</option>
+        </select><input name="item_option_name_1" value="QuickFix Email" type="hidden"><input
+          name="item_option_price_1" value="300.0" type="hidden"><input
+          name="item_option_description_1"
+          value="Includes: Detailed instructions for setting up an Email option in Oracle Applications from the concurrent manager. Any report on the system can be emailed as a MS Word or PDF file. Also supports multiple addresses.
+
+Does not include support. "
+          type="hidden"><input name="item_option_quantity_1" value="1" type="hidden"><input
+          name="item_option_currency_1" value="USD" type="hidden"><input name="item_option_name_2"
+          value="QuickFix Consulting Email" type="hidden"><input name="item_option_price_2"
+          value="1000.0" type="hidden"><input name="item_option_description_2"
+          value="Includes:
+* 8 hours of off site consulting to complete installation of QuickFix Email. You will be able to email any Oracle Applications Report form the concurrent manager with the use of print drivers."
+          type="hidden"><input name="item_option_quantity_2" value="1" type="hidden"><input
+          name="item_option_currency_2" value="USD" type="hidden"></td>
+        <td align="left" width="1%"><input alt=""
+          src="https://checkout.google.com/buttons/buy.gif?merchant_id=119182417168152&amp;w=117&amp;h=48&amp;style=white&amp;variant=text&amp;loc=en_US"
+          type="image"></td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+  </li>
+</ul>
+
