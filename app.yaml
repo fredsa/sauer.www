@@ -43,7 +43,7 @@ handlers:
 - url: /.*
   script: main.application
   login: optional
-  secure: always
+  secure: optional
 
 
 libraries:
