@@ -9,7 +9,7 @@ jinja_environment = jinja2.Environment(
 _REDIRECTS = {
     '/': '/about',
     '/pda': 'https://sauer-pda.appspot.com/',
-    '/com.allen_sauer.gwt.game.hornetblast.HornetBlast/HornetBlast.html': 'http://hornet-blast.appspot.com/',
+    '/com.allen_sauer.gwt.game.hornetblast.HornetBlast/HornetBlast.html': 'https://hornet-blast.appspot.com/',
     '/com.allen_sauer.gwt.voices.demo.VoicesDemo/VoicesDemo.html': 'https://gwt-voices.appspot.com/',
     '/com.allen_sauer.gwt.dnd.demo.DragDropDemo/DragDropDemo.html': 'https://gwt-dnd.appspot.com/',
     '/com.allen_sauer.gwt.dnd.demo.DragAndDropDemo/DragAndDropDemo.html': 'https://gwt-dnd.appspot.com/',
