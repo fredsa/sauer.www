@@ -19,11 +19,6 @@ handlers:
   static_files: \1
   upload: favicon\.ico
 
-# Domain verfication: Webmaster Tools, Analytics, etc.
-- url: /(google.*\.html)
-  static_files: \1
-  upload: google.*\.html
-
 # Appstats
 - url: /stats.*
   script: google.appengine.ext.appstats.ui.app
