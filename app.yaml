@@ -37,7 +37,7 @@ handlers:
 # site CSS images
 - url: /(site/.*\.gif)
   static_files: \1
-  upload: sites/.*\.gif
+  upload: site/.*\.gif
 
 # Everything else (MUST APPEAR LAST)
 - url: /.*
