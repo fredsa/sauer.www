@@ -15,7 +15,7 @@ EOD
 fi
 
 echo -e "\n*** Rolling back any pending updates (just in case) ***\n"
-appcfg.py --oauth2 $* rollback .
+appcfg.py $* rollback .
 
 echo -e "\n*** DEPLOYING ***\n"
-appcfg.py --oauth2 $* update .
+appcfg.py $* update .
