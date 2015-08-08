@@ -25,17 +25,26 @@ class MainHandler(webapp2.RequestHandler):
     if url:
       return self.redirect(url)
 
-    if not path_info.endswith('/'):
-      return self.redirect('{0}/'.format(path_info))
+    if path_info.endswith('.html'):
+        # return
+        template = jinja_environment.get_template('site' + path_info)
+        values = {
+        }
+    else:
+        if not path_info.endswith('/'):
+          return self.redirect('{0}/'.format(path_info))
 
-    template = jinja_environment.get_template('site/page.html')
-    values = {
-        'content': '{0}/content.html'.format(self.request.path_info),
-    }
+        template = jinja_environment.get_template('site/page.html')
+        values = {
+            'content': '{0}/content.html'.format(self.request.path_info),
+        }
+
+    html = template.render(values)
     try:
-      html = template.render(values)
-    except:
-      return self.redirect('/')
+        html = template.render(values)
+    except Exception, e:
+        raise e
+        # return self.redirect('/')
 
     self.response.write(html)
 
