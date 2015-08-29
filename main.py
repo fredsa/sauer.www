@@ -25,6 +25,10 @@ class MainHandler(webapp2.RequestHandler):
     if url:
       return self.redirect(url)
 
+    if path_info == '/robots.txt':
+        self.response.status = 404
+        return
+
     if path_info.endswith('.html'):
         # return
         template = jinja_environment.get_template('site' + path_info)
