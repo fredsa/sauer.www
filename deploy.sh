@@ -2,20 +2,23 @@
 #
 set -ue
 
-if [ $( echo "$*" | egrep -- '-V'\|'--version=' >/dev/null; echo $? ) != 0 ]
+PROJECT=sauer-www
+
+if [ $( echo "$*" | egrep -- '-v'\|'--version=' >/dev/null; echo $? ) != 0 ]
 then
   cat <<EOD
 
-ERROR: Must specify explict '-V <version>' argument, e.g.
+ERROR: Must specify explict '-v <version>' argument, e.g.
 
-   $0 -V <version>
+   $0 -v <version>
 
 EOD
   exit 1
 fi
 
-echo -e "\n*** Rolling back any pending updates (just in case) ***\n"
-appcfg.py $* rollback .
-
 echo -e "\n*** DEPLOYING ***\n"
-appcfg.py $* update .
+gcloud.cmd app deploy --project $PROJECT --quiet $* app.yaml
+
+echo
+echo "Configure default version here:"
+echo "  https://console.cloud.google.com/appengine/versions?project=$PROJECT"
