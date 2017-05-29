@@ -29,9 +29,6 @@ class MainHandler(webapp2.RequestHandler):
         self.response.status = 404
         return
 
-    if path_info == '/privacy':
-        path_info = '/privacy.html'
-
     if path_info.endswith('.html'):
         # return
         template = jinja_environment.get_template('site' + path_info)
